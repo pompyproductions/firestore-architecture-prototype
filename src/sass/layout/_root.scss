@@ -1,0 +1,25 @@
+body {
+  height: var(--doc-height); // given by the resize.js module
+  overflow: hidden;
+  padding: 1rem;
+
+  background-color: var(--black);
+  color: var(--white);
+  font-family: "Rubik", sans-serif;
+
+  display: grid;
+  place-items: center;
+}
+
+main {
+  padding: 2rem;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  background-color: var(--green-bright);
+  background-color: var(--white);
+  color: var(--black);
+}
