@@ -15,4 +15,7 @@ node_modules/
 *.tgz
 
 # Additionally:
+dist
+.firebaserc
+.firebase
 src/config/firebaseConfig.js
