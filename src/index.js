@@ -2,8 +2,7 @@ import "./sass/styles.scss";
 import "./modules/resize";
 
 import { initializeApp } from "firebase/app";
+import firebaseConfig from "./config/firebaseConfig";
 
-const firebaseConfig = {
-  // config goes here
-};
+console.log(firebaseConfig);
 const firebaseApp = initializeApp(firebaseConfig);
