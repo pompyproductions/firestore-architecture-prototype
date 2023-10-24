@@ -33,7 +33,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             // title: "Webpack App",
             filename: "index.html",
-            template: path.resolve(__dirname, "src/template.html")
+            template: path.resolve(__dirname, "src/template.html"),
+            chunks: ["main"]
         }),
         new HtmlWebpackPlugin({
             filename: "admin.html",

@@ -1,7 +1,7 @@
 import "../sass/styles.scss";
 import "../modules/resize";
 
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../config/firebaseConfig";
 
@@ -10,9 +10,11 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, user => {
   if (user) {
-    console.log(user.uid, "logged in")
+    document.querySelector("#logged-in").classList.remove("hidden")
+    document.querySelector("#logged-out").classList.add("hidden")
   } else {
-    console.log("not logged in")
+    document.querySelector("#logged-in").classList.add("hidden")
+    document.querySelector("#logged-out").classList.remove("hidden")
   }
 })
 
@@ -31,3 +33,6 @@ document.getElementById("login-button").addEventListener("click", e => {
   })
 })
 
+document.getElementById("logout-button").addEventListener("click", e => {
+  if (auth.currentUser) signOut(auth);
+})

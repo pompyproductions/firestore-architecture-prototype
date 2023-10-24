@@ -23,3 +23,9 @@ main {
   background-color: var(--white);
   color: var(--black);
 }
+
+main.admin {
+  .hidden {
+    display: none;
+  }
+}
