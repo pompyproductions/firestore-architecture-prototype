@@ -18,15 +18,20 @@ function newListItem(id, data) {
   const year = document.createElement("p");
   year.textContent = data.year;
   
-  const uploadButton = document.createElement("button");
-  uploadButton.textContent = "Upload";
+  const imageButton = document.createElement("button");
+  if (data.thumbnail) {
+    imageButton.textContent = "Update image";
+    imageButton.classList.add("green");
+  } else {
+    imageButton.textContent = "Upload image"
+  }
 
   elem.append(
     deleteButton, 
     title, 
     newVSep(),
     year, 
-    uploadButton
+    imageButton
   );
   elem.classList.add("list-item");
 
