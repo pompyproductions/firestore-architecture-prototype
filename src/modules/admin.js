@@ -1,14 +1,12 @@
 import "../sass/styles.scss";
 import "../modules/resize";
 
-import firebaseConfig from "../config/firebaseConfig";
-import { initializeApp } from "firebase/app";
+import app from "./firebase/app";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { newListItem } from "./adminProjectList";
 
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 

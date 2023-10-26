@@ -1,20 +1,16 @@
 import "./sass/styles.scss";
 import "./modules/resize";
 
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import firebaseApp from "./modules/firebase/app";
+import firestore from "./modules/firebase/firestore";
+
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import firebaseConfig from "./config/firebaseConfig";
 import { createThumbnail } from "./modules/projectLinks";
 
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
 
-const querySnapshot = await getDocs(collection(db, "projects"));
-querySnapshot.forEach(async entry => {
-  // console.log(entry.data().thumbnail);
-  const url = await getDownloadURL(ref(storage, entry.data().thumbnail));
+const projects = await firestore.getAllProjects();
+projects.forEach(async entry => {
+  const url = await getDownloadURL(ref(storage, entry.thumbnail));
   document.querySelector("#project-thumbnails").appendChild(createThumbnail(url));
-  console.log(url);
 })
