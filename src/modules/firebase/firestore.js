@@ -8,11 +8,6 @@ async function getAllProjects() {
   let arr = [];
   querySnapshot.forEach(async (entry) => {
     arr.push(entry.data());
-    // const url = await getDownloadURL(ref(storage, entry.data().thumbnail));
-    // document
-    //   .querySelector("#project-thumbnails")
-    //   .appendChild(createThumbnail(url));
-    // console.log(url);
   });
   return arr;
 }

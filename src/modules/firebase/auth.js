@@ -29,4 +29,4 @@ const logOut = () => {
   if (auth.currentUser) signOut(auth);
 }
 
-export default { logIn, logOut }
+export default { logIn, logOut  }

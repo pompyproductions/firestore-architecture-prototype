@@ -1,0 +1,38 @@
+#logged-in {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  #logout-button {
+    align-self: start;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .vsep {
+    height: 1.2rem;
+    flex: 0 0 1px;
+    background-color: var(--black);
+  }
+  & > button {
+    padding: 0 1.2rem;
+    border-radius: 0;
+    border: 1px solid var(--black);
+    height: 2rem;
+    &.delete {
+      width: 2rem;
+      padding: 0;
+    }
+    &.green {
+      background-color: var(--green);
+    }
+  }
+  & > * {
+    height: 1.6rem;
+    line-height: 1.6rem;
+    white-space: nowrap;
+  }
+}
