@@ -27,7 +27,7 @@ document.getElementById("logout-button").addEventListener("click", () => {
 const parent = document.getElementById("project-list");
 const projects = await firestore.getAllProjects();
 
-projects.forEach(data => {
-  parent.append(newListItem(data));
+Object.keys(projects).forEach(id => {
+  parent.append(newListItem(id, projects[id]));
 })
 

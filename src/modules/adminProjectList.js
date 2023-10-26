@@ -4,8 +4,9 @@ function newVSep() {
   return elem
 }
 
-function newListItem(data) {
+function newListItem(id, data) {
   const elem = document.createElement("li");
+  elem.setAttribute("data-id", id)
 
   const title = document.createElement("h3");
   title.textContent = data.title;
