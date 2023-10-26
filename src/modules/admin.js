@@ -2,13 +2,11 @@ import "../sass/styles.scss";
 import "../modules/resize";
 
 import app from "./firebase/app";
+import firestore from "./firebase/firestore";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { newListItem } from "./adminProjectList";
 
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const logIn = () => {
   const email = document.getElementById("login-email").value;
@@ -47,14 +45,10 @@ onAuthStateChanged(auth, user => {
 document.getElementById("login-button").addEventListener("click", logIn)
 document.getElementById("logout-button").addEventListener("click", logOut)
 
-const querySnapshot = await getDocs(collection(db, "projects"));
-
 const parent = document.getElementById("project-list");
-querySnapshot.forEach(async entry => {
-  const data = entry.data();
-  console.log(newListItem(data));
+const projects = await firestore.getAllProjects();
+
+projects.forEach(data => {
   parent.append(newListItem(data));
-  // const url = await getDownloadURL(ref(storage, entry.data().thumbnail));
-  // document.querySelector("#project-thumbnails").appendChild(createThumbnail(url));
-  // console.log(url);
 })
+
