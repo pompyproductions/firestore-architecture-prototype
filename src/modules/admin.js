@@ -1,54 +1,33 @@
 import "../sass/styles.scss";
 import "../modules/resize";
 
-import app from "./firebase/app";
 import firestore from "./firebase/firestore";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import auth from "./firebase/auth";
 import { newListItem } from "./adminProjectList";
-
-const auth = getAuth(app);
-
-const logIn = () => {
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-
-  signInWithEmailAndPassword(auth, email, password)
-  .then(userCred => {
-    const user = userCred.user;
-    alert(`successfully logged in as: ${user}`);
-  })
-  .catch(err => {
-    alert(err.message);
-    console.log(`error code: ${err.code}`);
-  })
-}
-const logOut = () => {
-  if (auth.currentUser) signOut(auth);
-}
 
 document.addEventListener("keydown", e => {
   if (!auth.currentUser && e.key === "Enter") {
-    logIn()
+    auth.logIn(
+      document.getElementById("login-email").value,
+      document.getElementById("login-password").value
+    )
   }
 })
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    document.querySelector("#logged-in").classList.remove("hidden")
-    document.querySelector("#logged-out").classList.add("hidden")
-  } else {
-    document.querySelector("#logged-in").classList.add("hidden")
-    document.querySelector("#logged-out").classList.remove("hidden")
-  }
+document.getElementById("login-button").addEventListener("click", () => {
+  auth.logIn(
+    document.getElementById("login-email").value,
+    document.getElementById("login-password").value
+  )
 })
-
-document.getElementById("login-button").addEventListener("click", logIn)
-document.getElementById("logout-button").addEventListener("click", logOut)
+document.getElementById("logout-button").addEventListener("click", () => {
+  auth.logOut()
+})
 
 const parent = document.getElementById("project-list");
 const projects = await firestore.getAllProjects();
 
-projects.forEach(data => {
-  parent.append(newListItem(data));
+Object.keys(projects).forEach(id => {
+  parent.append(newListItem(id, projects[id]));
 })
 

@@ -5,16 +5,12 @@ const db = getFirestore(app);
 
 async function getAllProjects() {
   const querySnapshot = await getDocs(collection(db, "projects"));
-  let arr = [];
+  let projects = {};
   querySnapshot.forEach(async (entry) => {
-    arr.push(entry.data());
-    // const url = await getDownloadURL(ref(storage, entry.data().thumbnail));
-    // document
-    //   .querySelector("#project-thumbnails")
-    //   .appendChild(createThumbnail(url));
-    // console.log(url);
+    projects[entry.id] = entry.data()
   });
-  return arr;
+  console.log(projects)
+  return projects;
 }
 
 export default {
