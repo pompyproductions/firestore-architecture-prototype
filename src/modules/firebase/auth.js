@@ -5,6 +5,7 @@ const auth = getAuth(app);
 
 // consider putting this back in admin.js
 onAuthStateChanged(auth, user => {
+  console.log(user);
   if (user) {
     document.querySelector("#logged-in").classList.remove("hidden")
     document.querySelector("#logged-out").classList.add("hidden")
